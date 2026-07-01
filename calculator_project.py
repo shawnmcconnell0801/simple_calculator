@@ -1,24 +1,35 @@
 import cmath
-def add(a,b):
+
+history = []
+
+def add(a, b):
     return a + b
-def subtract(a,b):
+
+def subtract(a, b):
     return a - b
-def multiply(a,b):
+
+def multiply(a, b):
     return a * b
-def divide(a,b):
+
+def divide(a, b):
     return a / b
+
 def square(a):
     return a ** 2
+
 def cube(a):
     return a ** 3
-def sqrt(a):
-        return cmath.sqrt(a)
 
-#menu block
-print("CALCULATOR")
+def sqrt(a):
+    return cmath.sqrt(a)
+
+print("=" * 35)
+print("         CALCULATOR")
+print("=" * 35)
 
 while True:
-    print("Menu")
+
+    print("\nMenu")
     print("1. Add")
     print("2. Subtract")
     print("3. Multiply")
@@ -26,51 +37,103 @@ while True:
     print("5. Square")
     print("6. Cube")
     print("7. Square Root")
-    print("8. Exit")
-    
+    print("8. View History")
+    print("9. Clear History")
+    print("10. Exit")
+
     try:
-        choice=int(input("Enter your choice: "))
+        choice = int(input("Enter your choice: "))
     except ValueError:
         print("Invalid choice.")
         continue
-    
-    
-    if choice==1:
-        x, y = map(int, input("Enter the numbers with a space: ").split())
-        print(add(x, y))
 
-    elif choice==2:
-        x, y = map(int, input("Enter the numbers with a space: ").split())
-        print(subtract(x, y))
-    
-    elif choice==3:
-        x, y = map(int, input("Enter the numbers with a space: ").split())
-        print(multiply(x,y))
-    
-    elif choice==4:
-        x, y = map(int, input("Enter the numbers with a space: ").split())
-        print(divide(x,y))
-    
-    elif choice==5:
-        x=int(input("Enter the number"))
-        print(square(x))
-    
-    elif choice==6:
-        x=int(input("Enter the number"))
-        print(cube(x))
-    
-    elif choice==7:
-        x=int(input("Enter the number"))
-        print(sqrt(x))
+    if choice == 1:
+        try:
+            x, y = map(float, input("Enter two numbers: ").split())
+            result = add(x, y)
+            print(f"Result: {result}")
+            history.append(f"{x} + {y} = {result}")
+        except ValueError:
+            print("Invalid input.")
 
-    elif choice==8:
+    elif choice == 2:
+        try:
+            x, y = map(float, input("Enter two numbers: ").split())
+            result = subtract(x, y)
+            print(f"Result: {result}")
+            history.append(f"{x} - {y} = {result}")
+        except ValueError:
+            print("Invalid input.")
+
+    elif choice == 3:
+        try:
+            x, y = map(float, input("Enter two numbers: ").split())
+            result = multiply(x, y)
+            print(f"Result: {result}")
+            history.append(f"{x} × {y} = {result}")
+        except ValueError:
+            print("Invalid input.")
+
+    elif choice == 4:
+        try:
+            x, y = map(float, input("Enter two numbers: ").split())
+
+            if y == 0:
+                print("Cannot divide by zero.")
+            else:
+                result = divide(x, y)
+                print(f"Result: {result}")
+                history.append(f"{x} ÷ {y} = {result}")
+
+        except ValueError:
+            print("Invalid input.")
+
+    elif choice == 5:
+        try:
+            x = float(input("Enter a number: "))
+            result = square(x)
+            print(f"Result: {result}")
+            history.append(f"{x}² = {result}")
+        except ValueError:
+            print("Invalid input.")
+
+    elif choice == 6:
+        try:
+            x = float(input("Enter a number: "))
+            result = cube(x)
+            print(f"Result: {result}")
+            history.append(f"{x}³ = {result}")
+        except ValueError:
+            print("Invalid input.")
+
+    elif choice == 7:
+        try:
+            x = float(input("Enter a number: "))
+            result = sqrt(x)
+            print(f"Result: {result}")
+            history.append(f"√{x} = {result}")
+        except ValueError:
+            print("Invalid input.")
+
+    elif choice == 8:
+
+        if len(history) == 0:
+            print("No calculations yet.")
+
+        else:
+            print("\nCalculation History")
+            print("-" * 25)
+
+            for calculation in history:
+                print(calculation)
+
+    elif choice == 9:
+        history.clear()
+        print("History cleared.")
+
+    elif choice == 10:
         print("Exiting calculator. Goodbye!")
         break
-    
+
     else:
-        print("Invalid Choice")
-    
-
-    
-
-
+        print("Invalid choice.")
